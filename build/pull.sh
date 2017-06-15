@@ -13,3 +13,4 @@ path_build=$path/build
 
 source $path_build/config.sh
 source $path_build/methods.sh
+source $path_build/create-directories.sh

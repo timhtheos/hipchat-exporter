@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $0 == *config.sh ]]; then
+  echo "You cannot execute this file. Please execute pull.sh from its own"
+  echo "directory."
+  exit 1
+fi
+
 # Define auth.
 auth=QaohLWGHxhSQyxzNeRay9WYUVzzqYzD4blQHp6vo
 
@@ -17,8 +23,3 @@ hipchat=https://api.hipchat.com/v2
 
 # Define exported directory path.
 export_path=exported
-
-# Create exported path.
-if [[ ! -d $export_path ]]; then
-  mkdir $export_path
-fi
