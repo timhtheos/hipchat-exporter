@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $0 == *methods.sh ]]; then
+  echo "You cannot execute this file. Please execute pull.sh from its own"
+  echo "directory."
+  exit 1
+fi
+
 # Get users.
 #
 # Requires:
