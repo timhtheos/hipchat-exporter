@@ -109,3 +109,6 @@ for room in $room_ids; do
   # Reset start index.
   start_index=0
 done
+
+# Delete all empty files.
+find $export_path/ -type f -empty
