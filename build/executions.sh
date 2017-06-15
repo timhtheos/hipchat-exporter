@@ -75,3 +75,37 @@ for room in $room_ids; do
     getRoomInfo $room > $export_path/room.$room.json
   fi
 done
+
+# Get room chat history.
+#
+
+# Define start index.
+start_index=0
+
+for room in $room_ids; do
+  count=1
+
+  if [[ ! -f $export_path/room.$room.chat.$start_index.json ]]; then
+    while [[ $count -ne 0 ]]; do
+      chat_history=$(getRoomChatHistory $room $start_index)
+
+      # Check whether to while loop again.
+      if [[ $(echo $chat_history | jq '.items | length') -eq 0 ]]; then
+        # Don't while loop again.
+        count=0
+
+        # Reset start index.
+        start_index=0
+      else
+        # Write to file.
+        echo $chat_history | jq '.' > $export_path/room.$room.chat.$start_index.json
+
+        # Increment start index by 1k.
+        start_index=$[$start_index+1000]
+      fi
+    done
+  fi
+
+  # Reset start index.
+  start_index=0
+done
