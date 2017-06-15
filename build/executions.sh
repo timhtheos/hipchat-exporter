@@ -57,3 +57,21 @@ for user in $user_ids; do
   # Reset start index.
   start_index=0
 done
+
+# Export rooms.
+#
+# Assuming that the number of rooms is less than 1000.
+rooms=$(getRooms)
+if [[ ! -f $export_path/rooms.json ]]; then
+  echo $rooms | jq '.' > $export_path/rooms.json
+fi
+
+# Get room IDs.
+room_ids=$(echo $rooms | jq '.items[] | .id')
+
+# Get room info.
+for room in $room_ids; do
+  if [[ ! -f $export_path/room.$room.json ]]; then
+    getRoomInfo $room > $export_path/room.$room.json
+  fi
+done
