@@ -7,7 +7,7 @@ if [[ $0 == *config.sh ]]; then
 fi
 
 # Define auth.
-auth=QaohLWGHxhSQyxzNeRay9WYUVzzqYzD4blQHp6vo
+auth=
 
 # Define global max-results; max of 1000.
 maxr=1000
@@ -23,3 +23,8 @@ hipchat=https://api.hipchat.com/v2
 
 # Define exported directory path.
 export_path=exported
+
+if [[ -z $auth ]]; then
+  echo "Auth not defined."
+  exit 1
+fi
