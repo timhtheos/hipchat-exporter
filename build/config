@@ -30,10 +30,12 @@ function getUsers {
 }
 
 # Get user info.
-# Requires: User ID as first parameter.
+#
+# Requires:
+#   $1 - User ID.
 function getUserInfo {
   if [[ -z $1 ]]; then
-    echo "User id not defined."
+    echo "User ID not defined."
     exit 1
   fi
 
@@ -41,3 +43,17 @@ function getUserInfo {
   echo $data | jq '.'
 }
 
+# Get user chat history.
+# 
+# Requires:
+#   $1 - User ID
+#   $2 - Start index
+function getUserChat {
+  if [[ -z $1 ]]; then
+    echo "User ID not defined."
+    exit 1
+  fi
+  
+  data=$(wget -O - "$hipchat/user/$1/history?auth_token=$auth&max-results=$maxr&start-index=$2&date=$date&reverse=$rvrs")
+  echo $data | jq '.'
+}
