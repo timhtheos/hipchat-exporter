@@ -10,7 +10,7 @@ fi
 #
 # Assuming that the number of users is less than 1000.
 users=$(getUsers)
-if [[ ! -f $exported_path/users.json ]]; then
+if [[ ! -f $export_path/users.json ]]; then
   echo $users | jq '.' > $export_path/users.json
 fi
 
@@ -19,7 +19,7 @@ user_ids=$(echo $users | jq '.items[] | .id')
 
 # Get user info.
 for user in $user_ids; do
-  if [[ ! -f $exported_path/user.$user.json ]]; then
+  if [[ ! -f $export_path/user.$user.json ]]; then
     getUserInfo $user > $export_path/user.$user.json
   fi
 done
@@ -46,8 +46,7 @@ for user in $user_ids; do
         start_index=0
       else
         # Write to file.
-          echo $chat_history | jq '.' > $export_path/user.$user.chat.$start_index.json
-        fi
+        echo $chat_history | jq '.' > $export_path/user.$user.chat.$start_index.json
 
         # Increment start index by 1k.
         start_index=$[$start_index+1000]
