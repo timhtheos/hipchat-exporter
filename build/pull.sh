@@ -2,7 +2,7 @@
 
 path=$(pwd)
 
-if [[ $path == *build ]]; then
+if [[ $path -eq *build ]]; then
   echo "This file - build/pull.sh - should not be executed directly."
   echo "Please execute pull.sh, and not build/pull.sh, and it must be"
   echo "executed from its current directory."

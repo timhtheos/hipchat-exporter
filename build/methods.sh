@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $0 == *methods.sh ]]; then
+if [[ $0 -eq *methods.sh ]]; then
   echo "You cannot execute this file. Please execute pull.sh from its own"
   echo "directory."
   exit 1

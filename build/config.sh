@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $0 == *config.sh ]]; then
+if [[ $0 -eq *config.sh ]]; then
   echo "You cannot execute this file. Please execute pull.sh from its own"
   echo "directory."
   exit 1
